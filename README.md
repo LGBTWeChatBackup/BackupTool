@@ -37,3 +37,12 @@
 - pdfkit `pip3 / pip install pdfkit`
 - wkhtmltopdf https://wkhtmltopdf.org
 
+## TODOS
+
+1. 文件读取URL
+2. CSV读取URL
+3. 自动化获取文章列表
+4. 错误后自动恢复运行
+5. 等等
+
+
