@@ -27,14 +27,8 @@ class PubVar:
     WXID = "UNDEFINE"  #更改为微信号
     SleepTime = 3 # 中间间隔时间，最低应设置为3s，图片较多的情况10s可能也会被限制，可以使用代理（下一版本添加功能）
     ListType = 1 # 1: 为从该文件中URLList读取，新Html文件名为数字结构; 2: 为从以下CSVFile中读取，请注意文件编码，建议UTF-8并Excel编辑
-    URLList = [
-        "https://mp.weixin.qq.com/s?src=11&timestamp=1625673601&ver=3176&signature=9ZU*LrxWeulvoAjy7Ctvf*5xcZr8sI7JO902GI6wKelbUgpSjyEuw*Ff7DBHpR*NUkdIwofzdlijMWxLT1zctE8zGPmBY71C7JJobZexkUfjPvvT6njwdZBOC9v-OXHD&new=1",
-        "https://mp.weixin.qq.com/s?src=11&timestamp=1625673601&ver=3176&signature=KMPWy9Gh35tmBI5dY0F9tvt4mkRl9r-fBWGKIlBvg06bztb*UCrRfyL*S*U8sGKmW8qzNbZ31xKee5a1ilryCN*4wiT14ucZHfCIUeOr96yMppngaP1roeTuFkfpuxXn&new=1",
-        "https://mp.weixin.qq.com/s?src=11&timestamp=1625673601&ver=3176&signature=qMZdzrbey7hFXJ0q-3jbZmT1yCFuRf702lc-CCba-EX2c4N800joEp*m6v6q4aPzwpXkiO5imlRSpjVjhpK4rQ-tJhfrM9LU0DmpLKSv3IUgq5VjHSHdwrjtOyeZine2&new=1",
-        "https://mp.weixin.qq.com/s?src=11&timestamp=1625673601&ver=3176&signature=PA-dJqdhMs6iP2EowGRY4lEkfpuhSk4FsULkywK5z8-HjBlKQHGkH*InQDpqWb9cqGehQz6xRQ9edjV3IzF9htkyxo-WwxRJUaGEJBpWy10*udnmpy354-KFqqX9hFBH&new=1"
-    
-    ]
-    
+
+    URLFile = "./URLs.txt"
     # 未完成部分
     CSVFile = "./CSVTable1.csv" #FileNumber仅供参考 URL为微信文章URL Name为文章名称
     # CSVFile = "./CSVTable2.csv" #FileNumber仅供参考 URL为微信文章URL Name为文章名称，不填写，自动数字命名
@@ -118,10 +112,12 @@ if __name__ == "__main__":
     ImgDir =  "./images"
     if not os.path.exists(os.path.join(HtmlDir ,ImgDir)):
         os.makedirs(os.path.join(HtmlDir ,ImgDir))
-
-
+    URLList = []
     if PubVar.ListType == 1:
-        URLList = PubVar.URLList
+        with open(PubVar.URLFile) as f:
+            for line in f:
+                URLList.append(line.strip())
+        print(URLList)
     elif PubVar.ListType == 2:
         print("Sorry,PLEASE WAITING FOR NEXT Ver.")
     else:
